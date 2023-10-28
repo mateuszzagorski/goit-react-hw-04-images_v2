@@ -7,14 +7,20 @@
   .form {
     display: flex;
     align-items: center;
-  }
+    }
   
   .button {
-    background-color: #4caf50;
-    color: white;
+    background-color: #f7e4ab;
+    color: black;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+    border-radius: 10%;
+    margin-left: 10px;
+  }
+  .button:hover{
+    background-color: #4caf50;
+    color: white;
   }
   
   .input {
@@ -23,3 +29,4 @@
     padding: 8px;
     border: 1px solid #ccc;
   }
+ 
