@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Searchbar from "./Searchbar/Searchbar";
 import ImageGallery from "./ImageGallery/ImageGallery";
 import Button from "./Button/Button";
@@ -16,15 +16,16 @@ export const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleSearchSubmit = (searchQuery) => {
-    setQuery(searchQuery);
-    setPage(1);
-    setImages([]);
-    fetchImages(searchQuery, 1);
-  };
+  useEffect(() => {
+    if (query === "") {
+      return;
+    }
+
+    setIsLoading(true);
+    fetchImages(query, 1);
+  }, [query]);
 
   const fetchImages = (searchQuery, pageNumber) => {
-    setIsLoading(true);
     fetch(
       `${BASE_URL}?q=${searchQuery}&page=${pageNumber}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
     )
@@ -35,6 +36,12 @@ export const App = () => {
       })
       .catch((error) => console.error("Error fetching data: ", error))
       .finally(() => setIsLoading(false));
+  };
+
+  const handleSearchSubmit = (searchQuery) => {
+    setQuery(searchQuery);
+    setPage(1);
+    setImages([]);
   };
 
   const loadMoreImages = () => {
