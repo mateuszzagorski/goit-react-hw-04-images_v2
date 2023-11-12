@@ -7,9 +7,6 @@ import Modal from "#components/Modal/Modal";
 import { getLinkByPageAndQuery } from "#consts/pixabay";
 import styles from "./App.module.css";
 
-const API_KEY = "39441278-dab432af90fd5d2445b56ddfd";
-const BASE_URL = "https://pixabay.com/api/";
-
 export const App = () => {
   const [query, setQuery] = useState("");
   const [images, setImages] = useState([]);
@@ -27,9 +24,8 @@ export const App = () => {
   }, [query]);
 
   const fetchImages = (searchQuery, pageNumber) => {
-    fetch(
-      `${BASE_URL}?q=${searchQuery}&page=${pageNumber}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
-    )
+    const link = getLinkByPageAndQuery(searchQuery, pageNumber);
+    fetch(link)
       .then((response) => response.json())
       .then((data) => {
         setImages((prevImages) => [...prevImages, ...data.hits]);
@@ -64,7 +60,9 @@ export const App = () => {
         <ImageGallery images={images} onImageClick={handleImageClick} />
       )}
       {isLoading && <Loader />}
-      {images.length > 0 && !isLoading && <Button onClick={loadMoreImages} isVisible={true} />}
+      {images.length > 0 && !isLoading && (
+        <Button onClick={loadMoreImages} isVisible={true} />
+      )}
       {selectedImage && <Modal onClose={closeModal} largeImageURL={selectedImage} />}
     </div>
   );
