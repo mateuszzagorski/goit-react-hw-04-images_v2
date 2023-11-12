@@ -25,8 +25,13 @@ export const App = () => {
 
   const fetchImages = (searchQuery, pageNumber) => {
     const link = getLinkByPageAndQuery(searchQuery, pageNumber);
+    console.log("Request URL:", link);
+  
     fetch(link)
-      .then((response) => response.json())
+      .then((response) => {
+        console.log("Response:", response);
+        return response.json();
+      })
       .then((data) => {
         setImages((prevImages) => [...prevImages, ...data.hits]);
         setPage(pageNumber + 1);
