@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Searchbar from "./Searchbar/Searchbar";
-import ImageGallery from "./ImageGallery/ImageGallery";
-import Button from "./Button/Button";
-import Loader from "./Loader";
-import Modal from "./Modal/Modal";
-import styles from './App.module.css';
+import Searchbar from "#components/Searchbar/Searchbar";
+import ImageGallery from "#components/ImageGallery/ImageGallery";
+import Button from "#components/Button/Button";
+import Loader from "#components/Loader";
+import Modal from "#components/Modal/Modal";
+import { getLinkByPageAndQuery } from "#consts/pixabay";
+import styles from "./App.module.css";
 
 const API_KEY = "39441278-dab432af90fd5d2445b56ddfd";
 const BASE_URL = "https://pixabay.com/api/";
