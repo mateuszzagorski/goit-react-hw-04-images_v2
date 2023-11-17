@@ -7,6 +7,7 @@ import Modal from "#components/Modal/Modal";
 import { getLinkByPageAndQuery } from "#consts/pixabay";
 import styles from "./App.module.css";
 
+
 export const App = () => {
   const [query, setQuery] = useState("");
   const [images, setImages] = useState([]);
@@ -39,7 +40,6 @@ export const App = () => {
       .catch((error) => console.error("Error fetching data: ", error))
       .finally(() => setIsLoading(false));
   };
-
   const handleSearchSubmit = (searchQuery) => {
     setQuery(searchQuery);
     setPage(1);
